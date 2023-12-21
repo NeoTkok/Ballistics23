@@ -2,7 +2,6 @@
 // Created by neodima on 26.10.23.
 //
 
-#include "Eigen/Dense"
 #include <gtest/gtest.h>
 
 TEST(AddTest, PositiveNumbers) {

@@ -7,7 +7,7 @@
 
 #include <array>
 #include <string>
-#include "sofa/sofa.h"
+#include "sofa.h"
 
 
 namespace Ballistics23::Time {
@@ -33,7 +33,6 @@ namespace Ballistics23::Time {
     constexpr std::array<std::string_view, 7> SCALES = {UT1, UTC, TAI, TT, TCG, TCB, TDB};
 
 
-
     template<typename TimeScales>
     class Time {
     private:
@@ -52,22 +51,13 @@ namespace Ballistics23::Time {
         [[nodiscard]] constexpr static Time fromMJD(double mjd) noexcept;
 
 
+        [[nodiscard]] constexpr static Time fromCalendar(int year, int mounth, int day,
+                                                         int hour, int minutes, int seconds);
+
+
     };
 
-    template<typename TimeScales>
-    constexpr Time<TimeScales>::Time() noexcept : jdInt_(0), jdPart_(0) {}
-
-    template<typename TimeScales>
-    constexpr Time<TimeScales>::Time(double jdInt, double jdPart) noexcept : jdInt_(jdInt), jdPart_(jdPart) {};
-
-    template<typename TimeScales>
-    constexpr Time<TimeScales>::Time(double jd) noexcept : jdInt_(static_cast<int>(jd)), jdPart_(jd - jdInt_) {};
-
-    template<typename TimeScales>
-
-
-
-}
+}  // namespace Ballistics23::Time
 
 
 
