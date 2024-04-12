@@ -1,14 +1,19 @@
-include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
+include_directories(
+        ${gtest_SOURCE_DIR}/include
+        ${gtest_SOURCE_DIR}
+        ${PROJECT_SOURCE_DIR}/src/ballistics
+        ${PROJECT_SOURCE_DIR}/data
+)
 
 file(GLOB_RECURSE TEST_SOURCES test_*.cpp)
-set(LIBS ${PROJECT_NAME}  gtest gtest_main)
-
-foreach (TEST_FILE IN LISTS TEST_SOURCES)
-    get_filename_component(TEST_FILE_NAME ${TEST_FILE} NAME_WE)
+foreach (test ${TEST_SOURCES})
+    get_filename_component(TEST_FILE_NAME ${test} NAME_WLE)
     set(EXECUTABLE_NAME run_${TEST_FILE_NAME})
-    add_executable(${EXECUTABLE_NAME} ${TEST_FILE})
 
-    target_link_libraries(${EXECUTABLE_NAME} ${LIBS})
-
-    add_test(NAME ${EXECUTABLE_NAME} COMMAND ${EXECUTABLE_NAME})
+    message("GOOOD")
+    add_executable("${EXECUTABLE_NAME}" ${test})
+    add_test(NAME "${EXECUTABLE_NAME}" COMMAND ${test})
+    target_link_libraries("${EXECUTABLE_NAME}" ${PROJECT_NAME} gtest gtest_main)
 endforeach ()
+
+
