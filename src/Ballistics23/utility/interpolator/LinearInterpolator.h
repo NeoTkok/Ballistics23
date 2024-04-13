@@ -7,18 +7,14 @@
 
 namespace Ballistics23::Utility {
 
-template <typename xType, typename yType> class Interpolator {
-
+template <typename xType, typename yType>
+class Interpolator {
 public:
   struct XY {
     xType x;
     yType y;
   };
 
-private:
-  Containers::vector<XY> data_;
-
-public:
   Interpolator() = default;
 
   explicit Interpolator(const Containers::vector<XY> &xy) noexcept
@@ -49,6 +45,8 @@ public:
 
     throw Exceptions::Exception("INTERPOLATOR ERROR: VALUE OUT OF BOUNDS");
   }
+private:
+  Containers::vector<XY> data_;
 };
 
 } // namespace Ballistics23::Utility
