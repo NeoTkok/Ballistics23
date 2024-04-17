@@ -14,6 +14,9 @@ using indexType = std::size_t;
 using Vector3d = Eigen::Vector3<double>;
 using Matrix3d = Eigen::Matrix<double, 3, 3>;
 
+template<typename RealType> using Matrix3 = Eigen::Matrix<RealType,3,3>;
+
+
 namespace Containers {
 
 template <typename RealType> using vector = std::vector<RealType>;
