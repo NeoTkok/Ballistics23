@@ -1,5 +1,5 @@
 //
-// Created by neodima on 07.12.23.
+// Created by neodima on 08.12.23.
 //
 
 #pragma once
@@ -50,10 +50,10 @@ PolarMotion PolarMotionContainer::getPolarMotion(
       const scalar dX = polarMotionData_[i + 1].xp_ - polarMotionData_[i].xp_;
 
       const scalar denominator = timeData_[i + 1] - timeData_[i];
-      const scalar coeffTime = (utcMjd - timeData_[i]) / denominator;
+      const scalar coeff = (utcMjd - timeData_[i]) / denominator;
 
-      const scalar yp = polarMotionData_[i].yp_ + dY / coeffTime;
-      const scalar xp = polarMotionData_[i].xp_ + dX / coeffTime;
+      const scalar yp = polarMotionData_[i].yp_ + dY * coeff;
+      const scalar xp = polarMotionData_[i].xp_ + dX * coeff;
 
       return {xp, yp};
     }

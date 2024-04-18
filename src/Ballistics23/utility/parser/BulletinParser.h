@@ -28,33 +28,6 @@ std::string getRootPath(const std::string& filePath, int stepsBack) {
 }
 
 
-
-
-
-/**
- * Аналог функции split() на питоне
- * @param s строка
- * @param delimiter разделитель
- * @return вектор разделенных строк
- */
-[[nodiscard]] Containers::vector<Containers::string>
-split(const Containers::string &s,
-      const Containers::string &delimiter = " ") noexcept {
-  Ballistics23::indexType pos_start = 0, pos_end,
-                          delim_len = delimiter.length();
-  Containers::vector<Containers::string> res;
-
-  while ((pos_end = s.find(delimiter, pos_start)) != Containers::string::npos) {
-    const Containers::string token = s.substr(pos_start, pos_end - pos_start);
-    pos_start = pos_end + delim_len;
-    res.push_back(token);
-  }
-
-  res.push_back(s.substr(pos_start));
-  return res;
-}
-
-
 [[nodiscard]] std::vector<scalar>
 getColumn(const std::string &path, const indexType column, const indexType& compareColumn,
           const scalar Begin, const scalar End) noexcept {
