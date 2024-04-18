@@ -1,7 +1,7 @@
 include_directories(
         ${gtest_SOURCE_DIR}/include
         ${gtest_SOURCE_DIR}
-        ${PROJECT_SOURCE_DIR}/src/ballistics
+        ${PROJECT_SOURCE_DIR}/src/Ballistics23
         ${PROJECT_SOURCE_DIR}/data
 )
 
