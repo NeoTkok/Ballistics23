@@ -13,9 +13,9 @@ TEST(EPHEMERIS, POSVEL) {
   const auto tolerance = static_cast<Ballistics23::scalar>(1);
 
   const std::string currentFile = __FILE__;
-  const std::string ephemerisPath =
-      currentFile.substr(0, currentFile.size() - 44) +
-      "data/ephemeris/de405.bin";
+  const std::string currentDir =
+      Ballistics23::Utility::getRootPath(currentFile, 4);
+  const std::string ephemerisPath = currentDir + "/data/ephemeris/de405.bin";
 
   const Ballistics23::Ephemeris::EphemerisCalculator ephemerisCalculator(
       ephemerisPath);
@@ -65,9 +65,9 @@ TEST(EPHEMERIS, POS) {
   const auto tolerance = static_cast<Ballistics23::scalar>(1);
 
   const std::string currentFile = __FILE__;
-  const std::string ephemerisPath =
-      currentFile.substr(0, currentFile.size() - 44) +
-      "data/ephemeris/de405.bin";
+  const std::string currentDir =
+      Ballistics23::Utility::getRootPath(currentFile, 4);
+  const std::string ephemerisPath = currentDir + "/data/ephemeris/de405.bin";
 
   const Ballistics23::Ephemeris::EphemerisCalculator ephemerisCalculator(
       ephemerisPath);
@@ -79,8 +79,6 @@ TEST(EPHEMERIS, POS) {
       "../../../data/frame/earth_rotation.csv";
   const Ballistics23::Utility::MJD_DUT mjd_dut =
       Ballistics23::Utility::CSVgetMJD_DUT(mjdDutPath, begin, end);
-
-  getColumn(csvPath, dutColumnIndex, mjdColumnIndex, begin, end)
 
   const Ballistics23::TimeModule::DutContainer dutContainer(mjd_dut.mjdVector,
                                                             mjd_dut.dutVector);

@@ -24,4 +24,12 @@ void sofaErrorHandler(const int status) {
         throw Exception("SOFA ERROR");
     }
 }
+
+void ephemerisErrorHandler(const int status) {
+  if (status != 1) {
+    throw Ballistics23::Exceptions::Exception("EPHEMERIS ERROR");
+  }
+}
+
+
 }
