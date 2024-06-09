@@ -2,8 +2,7 @@
 // Created by neodima on 13.02.24.
 //
 
-#ifndef BALLISTICS2023_CALCFORCES_H
-#define BALLISTICS2023_CALCFORCES_H
+#pragma once
 
 #include "Ballistics23/utility/types/BasicTypes.h"
 #include "Eigen/Dense"
@@ -24,5 +23,3 @@ public:
   calcAccelerationECEF(const Ballistics23::Vector3d &rECEF) const noexcept;
 };
 } // namespace Ballistics23::Force
-
-#endif // BALLISTICS2023_CALCFORCES_H
