@@ -2,6 +2,8 @@
 // Created by neodima on 04.12.23.
 //
 
+#pragma once
+
 #include "Ballistics23/exceptions/Exceptions.h"
 #include "Ballistics23/utility/types/BasicTypes.h"
 

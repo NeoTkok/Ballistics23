@@ -2,8 +2,7 @@
 // Created by neodima on 17.12.23.
 //
 
-#ifndef BALLISTICS2023_CELESTIALBODIES_H
-#define BALLISTICS2023_CELESTIALBODIES_H
+#pragma once
 
 namespace Ballistics23 {
 
@@ -24,7 +23,3 @@ namespace Ballistics23 {
         EARTH_MOON_BARYCENTER = 13
     };
 }
-
-
-
-#endif //BALLISTICS2023_CELESTIALBODIES_H

@@ -2,8 +2,7 @@
 // Created by neodima on 17.12.23.
 //
 
-#ifndef BALLISTICS2023_EPHEMERISCALCULATOR_H
-#define BALLISTICS2023_EPHEMERISCALCULATOR_H
+#pragma once
 
 #include "Ballistics23/exceptions/Exceptions.h"
 #include "Ballistics23/time/Time.h"
@@ -114,5 +113,3 @@ public:
   }
 };
 } // namespace Ballistics23::Ephemeris
-
-#endif // BALLISTICS2023_EPHEMERISCALCULATOR_H
