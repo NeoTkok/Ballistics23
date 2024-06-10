@@ -35,12 +35,12 @@ public:
 
   [[nodiscard]] PolarMotion
   getPolarMotion(const TimeModule::Time<TimeModule::TimeScale::UTC_SCALE> &utc)
-      const noexcept;
+      const;
 };
 
 PolarMotion PolarMotionContainer::getPolarMotion(
     const TimeModule::Time<TimeModule::TimeScale::UTC_SCALE> &utc)
-    const noexcept {
+    const {
 
   const scalar utcMjd = utc.mjd();
   for (indexType i = 0; i < timeData_.size() - 1; ++i) {
