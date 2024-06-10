@@ -9,11 +9,11 @@
 namespace Ballistics23 {
 
 struct Keplerian {
-  scalar semiMajorAxis;
-  scalar eccentricity;
-  scalar inclination;
-  scalar argumentPeriapsis;
-  scalar ascendingNode;
-  scalar trueAnomaly;
+    scalar semiMajorAxis;
+    scalar eccentricity;
+    scalar inclination;
+    scalar argumentPeriapsis;
+    scalar ascendingNode;
+    scalar trueAnomaly;
 };
-} // namespace Ballistics23
+}  // namespace Ballistics23

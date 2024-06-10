@@ -8,8 +8,8 @@
 
 namespace Ballistics23 {
 struct Cartesian {
-  Vector3d position;
-  Vector3d velocity;
+    Vector3d position;
+    Vector3d velocity;
 };
 
-} // namespace Ballistics23
+}  // namespace Ballistics23
