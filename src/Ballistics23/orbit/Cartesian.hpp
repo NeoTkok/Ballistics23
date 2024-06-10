@@ -7,7 +7,7 @@
 #include "Ballistics23/utility/types/BasicTypes.h"
 
 namespace Ballistics23 {
-struct CartesianOrbit {
+struct Cartesian {
   Vector3d position;
   Vector3d velocity;
 };
