@@ -7,21 +7,11 @@
 #include "Ballistics23/time/DutCorrection.h"
 #include "Ballistics23/time/Time.h"
 
+using TimeUTC = Ballistics23::TimeModule::Time<Ballistics23::TimeModule::TimeScale::UTC_SCALE>;
 
 TEST(INTERPOLATOR, MID_POINTS) {
-
     const Ballistics23::Containers::vector<Ballistics23::scalar> dutValues = {
-            -0.11244,
-            -0.11378,
-            -0.11512,
-            -0.11637,
-            -0.11743,
-            -0.11836,
-            -0.11908,
-            -0.11961,
-            -0.12001,
-            -0.12037,
-            -0.12073};
+        -0.11244, -0.11378, -0.11512, -0.11637, -0.11743, -0.11836, -0.11908, -0.11961, -0.12001, -0.12037, -0.12073};
 
     const Ballistics23::scalar timeStartMJD_UTC = 58480;
     const Ballistics23::scalar timeEndMJD_UTC = 58490;
@@ -37,14 +27,12 @@ TEST(INTERPOLATOR, MID_POINTS) {
 
     const Ballistics23::TimeModule::DutContainer dutContainer(timePointsMJD_UTC, dutValues);
 
-    //mid-points test
+    // mid-points test
     for (Ballistics23::indexType i = 0; i < dutValues.size() - 1; ++i) {
-
         const Ballistics23::scalar referenceInterpolatedDut = (dutValues[i] + dutValues[i + 1]) / 2;
 
         const Ballistics23::scalar midPointMJD_UTC = (timePointsMJD_UTC[i] + timePointsMJD_UTC[i + 1]) / 2;
-        const Ballistics23::TimeModule::Time<Ballistics23::TimeModule::TimeScale::UTC_SCALE> utc = Ballistics23::TimeModule::Time<Ballistics23::TimeModule::TimeScale::UTC_SCALE>::buildFromMJD(
-                midPointMJD_UTC);
+        const TimeUTC utc = TimeUTC::buildFromMJD(midPointMJD_UTC);
 
         ASSERT_DOUBLE_EQ(utc.mjd(), midPointMJD_UTC);
 
@@ -55,19 +43,8 @@ TEST(INTERPOLATOR, MID_POINTS) {
 }
 
 TEST(INTERPOLATOR, LEFT_POINTS) {
-
     const Ballistics23::Containers::vector<Ballistics23::scalar> dutValues = {
-            -0.11244,
-            -0.11378,
-            -0.11512,
-            -0.11637,
-            -0.11743,
-            -0.11836,
-            -0.11908,
-            -0.11961,
-            -0.12001,
-            -0.12037,
-            -0.12073};
+        -0.11244, -0.11378, -0.11512, -0.11637, -0.11743, -0.11836, -0.11908, -0.11961, -0.12001, -0.12037, -0.12073};
 
     const Ballistics23::scalar timeStartMJD_UTC = 58480;
     const Ballistics23::scalar timeEndMJD_UTC = 58490;
@@ -83,14 +60,12 @@ TEST(INTERPOLATOR, LEFT_POINTS) {
 
     const Ballistics23::TimeModule::DutContainer dutContainer(timePointsMJD_UTC, dutValues);
 
-    //left-points test
+    // left-points test
     for (Ballistics23::indexType i = 0; i < dutValues.size() - 1; ++i) {
-
         const Ballistics23::scalar referenceInterpolatedDut = dutValues[i];
 
         const Ballistics23::scalar midPointMJD_UTC = timePointsMJD_UTC[i];
-        const Ballistics23::TimeModule::Time<Ballistics23::TimeModule::TimeScale::UTC_SCALE> utc = Ballistics23::TimeModule::Time<Ballistics23::TimeModule::TimeScale::UTC_SCALE>::buildFromMJD(
-                midPointMJD_UTC);
+        const TimeUTC utc = TimeUTC::buildFromMJD(midPointMJD_UTC);
 
         ASSERT_DOUBLE_EQ(utc.mjd(), midPointMJD_UTC);
 
@@ -101,19 +76,8 @@ TEST(INTERPOLATOR, LEFT_POINTS) {
 }
 
 TEST(INTERPOLATOR, RIGHT_POINTS) {
-
     const Ballistics23::Containers::vector<Ballistics23::scalar> dutValues = {
-            -0.11244,
-            -0.11378,
-            -0.11512,
-            -0.11637,
-            -0.11743,
-            -0.11836,
-            -0.11908,
-            -0.11961,
-            -0.12001,
-            -0.12037,
-            -0.12073};
+        -0.11244, -0.11378, -0.11512, -0.11637, -0.11743, -0.11836, -0.11908, -0.11961, -0.12001, -0.12037, -0.12073};
 
     const Ballistics23::scalar timeStartMJD_UTC = 58480;
     const Ballistics23::scalar timeEndMJD_UTC = 58490;
@@ -129,14 +93,12 @@ TEST(INTERPOLATOR, RIGHT_POINTS) {
 
     const Ballistics23::TimeModule::DutContainer dutContainer(timePointsMJD_UTC, dutValues);
 
-    //right-points test
+    // right-points test
     for (Ballistics23::indexType i = 0; i < dutValues.size() - 1; ++i) {
-
         const Ballistics23::scalar referenceInterpolatedDut = dutValues[i + 1];
 
         const Ballistics23::scalar midPointMJD_UTC = timePointsMJD_UTC[i + 1];
-        const Ballistics23::TimeModule::Time<Ballistics23::TimeModule::TimeScale::UTC_SCALE> utc = Ballistics23::TimeModule::Time<Ballistics23::TimeModule::TimeScale::UTC_SCALE>::buildFromMJD(
-                midPointMJD_UTC);
+        const TimeUTC utc = TimeUTC::buildFromMJD(midPointMJD_UTC);
 
         ASSERT_DOUBLE_EQ(utc.mjd(), midPointMJD_UTC);
 
