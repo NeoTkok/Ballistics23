@@ -6,13 +6,12 @@
 
 namespace Ballistics23::Force {
 
-Vector3d EarthGravityForce::calcAccelerationECEF(
-    const Ballistics23::Vector3d &rECEF) const noexcept {
-  double gx = 0;
-  double gy = 0;
-  double gz = 0;
-  gravityModel.V(rECEF.x(), rECEF.y(), rECEF.z(), gx, gy, gz);
+Vector3d EarthGravityForce::calcAccelerationECEF(const Ballistics23::Vector3d &positionECEF) const noexcept {
+    double gx = 0;
+    double gy = 0;
+    double gz = 0;
+    gravityModel.V(positionECEF.x(), positionECEF.y(), positionECEF.z(), gx, gy, gz);
 
-  return {gx, gy, gz};
+    return {gx, gy, gz};
 }
-} // namespace Ballistics23::Force
+}  // namespace Ballistics23::Force

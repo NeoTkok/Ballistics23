@@ -26,10 +26,9 @@ void sofaErrorHandler(const int status) {
 }
 
 void ephemerisErrorHandler(const int status) {
-  if (status != 1) {
-    throw Ballistics23::Exceptions::Exception("EPHEMERIS ERROR");
-  }
+    if (status != 1) {
+        throw Ballistics23::Exceptions::Exception("EPHEMERIS ERROR");
+    }
 }
 
-
-}
+}  // namespace Ballistics23::Exceptions
