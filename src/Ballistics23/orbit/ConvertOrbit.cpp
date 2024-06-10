@@ -65,7 +65,6 @@ Cartesian KeplerianToCartesian(const Keplerian& orbit, scalar gravityParameter) 
     const Vector3d nodeVectorExp = Vector3d::UnitZ().cross(orbitalMomentum);  // вектор линии узлов
     const scalar nodeVectorExpNorm = nodeVectorExp.norm();
     const Vector3d e1 = nodeVectorExpNorm > 0 ? Vector3d(nodeVectorExp / nodeVectorExpNorm) : Vector3d::UnitX();
-    const Vector3d e2 = orbitalMomentumNormalized.cross(e1);
 
     const Vector3d eccentricityExp =
         ((velocityNormSqr - gravityParameter / positionNorm) * position - position.dot(velocity) * velocity) /
@@ -73,18 +72,14 @@ Cartesian KeplerianToCartesian(const Keplerian& orbit, scalar gravityParameter) 
 
     const scalar eccentricityExpNorm = eccentricityExp.norm();
     const Vector3d g1 = eccentricityExpNorm > 0 ? Vector3d(eccentricityExp / eccentricityExpNorm) : e1;
-    const Vector3d g2 = orbitalMomentumNormalized.cross(g1);
-    const scalar energyIntegral = velocityNormSqr / 2 - gravityParameter / positionNorm;  // интеграл энергии
-    const scalar semiMajorAxis = -gravityParameter / (2 * energyIntegral);  // большая полуось
 
-    const Vector3d vectorForInclination = e1.cross(Vector3d::UnitZ());  // e1.cross(Vector3d::UnitZ())
-    const scalar inclinationX = orbitalMomentum.z();
-    const scalar inclinationY = orbitalMomentum.dot(vectorForInclination);
-    const scalar inclination = std::atan2(inclinationY, inclinationX);
+    const scalar semiMajorAxis = -gravityParameter / (velocityNormSqr - 2 * gravityParameter / positionNorm);  // большая полуось
+
+    const scalar inclination = std::atan2(orbitalMomentum.dot(e1.cross(Vector3d::UnitZ())), orbitalMomentum.z());
     const scalar ascNode = std::atan2(e1.y(), e1.x());
-    const scalar ex = g1.dot(e1), ey = g1.dot(e2);
+    const scalar ex = g1.dot(e1), ey = g1.dot(orbitalMomentumNormalized.cross(e1));
     const scalar argPerig = std::atan2(ey, ex);
-    const scalar posX = position.dot(g1), posY = position.dot(g2);
+    const scalar posX = position.dot(g1), posY = position.dot(orbitalMomentumNormalized.cross(g1));
     const scalar anomaly = std::atan2(posY, posX);
 
     return Keplerian{semiMajorAxis,       eccentricityExpNorm, inclination,
