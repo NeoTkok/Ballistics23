@@ -14,7 +14,7 @@ Cartesian KeplerianToCartesian(const Keplerian &orbit, scalar gravityParameter);
 
 [[nodiscard]] Keplerian CartesianToKeplerian(const Cartesian &orbit, scalar gravityParameter);
 
-scalar normalize(scalar number) {
+inline scalar normalize(scalar number) {
     const scalar n = std::fmod(number, Ballistics23::PI2);
     return n >= 0 ? n : n + Ballistics23::PI2;
 }
