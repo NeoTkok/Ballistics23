@@ -21,6 +21,8 @@ private:
     TimeConverter timeConverter_;
     FrameConverter frameConverter_;
     EphemerisCalculator ephemerisCalculator_;
+    const EarthGravity &earthGravity_;
+    std::tuple<OtherForces...> otherForces_;
 
     struct InputParams {
         Vector3d moonPositionGCRS;
@@ -65,7 +67,7 @@ private:
 
     template <unsigned int... Is>
     [[nodiscard]] Vector3d auxFunction(const std::tuple<OtherForces...> &otherForces, const TimeTT timeTT,
-                                       const Vector3d &positionGCRS, const Vector3d &velocityGCRS, double mass,
+                                       const Vector3d &positionGCRS, const Vector3d &velocityGCRS, scalar mass,
                                        const allSatParams &allSatParams, const InputParams &inputParams,
                                        std::integer_sequence<unsigned int, Is...>) const noexcept {
         return (std::get<Is>(otherForces)
@@ -75,22 +77,25 @@ private:
 
 public:
     AccelerationCalculator(const TimeConverter &timeConverter, const FrameConverter &frameConverter,
-                           const EphemerisCalculator &ephemerisCalculator, EarthGravity &,
-                           const std::tuple<OtherForces...> &) noexcept
-        : timeConverter_(timeConverter), frameConverter_(frameConverter), ephemerisCalculator_(ephemerisCalculator){};
+                           const EphemerisCalculator &ephemerisCalculator, const EarthGravity &earthGravity,
+                           const std::tuple<OtherForces...> &otherForces)
+        : timeConverter_(timeConverter),
+          frameConverter_(frameConverter),
+          ephemerisCalculator_(ephemerisCalculator),
+          earthGravity_(earthGravity),
+          otherForces_(otherForces){};
 
-    [[nodiscard]] Vector3d calcAcceleration(const EarthGravity &earthGravity,
-                                            const std::tuple<OtherForces...> &otherForces, const TimeTT timeTT,
-                                            const Vector3d &positionITRS, const Vector3d &velocityITRS, double mass,
+    [[nodiscard]] Vector3d calcAcceleration(const TimeTT timeTT, const Vector3d &positionITRS,
+                                            const Vector3d &velocityITRS, double mass,
                                             const allSatParams &allSatParams) const noexcept {
         const Quaternion<double> quaternionGCRStoITRS = frameConverter_.quaternionGCRStoITRS(timeTT);
 
         const InputParams inputParams = calcInputParam(timeTT, quaternionGCRStoITRS);
 
-        const Vector3d earthGravAccelerationITRS = earthGravity.calcAccelerationECEF(positionITRS);
+        const Vector3d earthGravAccelerationITRS = earthGravity_.calcAccelerationECEF(positionITRS);
 
         const Vector3d otherForcesAcceleration =
-            auxFunction(otherForces, timeTT, positionITRS, velocityITRS, mass, allSatParams, inputParams,
+            auxFunction(otherForces_, timeTT, positionITRS, velocityITRS, mass, allSatParams, inputParams,
                         std::make_integer_sequence<unsigned int, sizeof...(OtherForces)>{});
 
         return earthGravAccelerationITRS + otherForcesAcceleration;
